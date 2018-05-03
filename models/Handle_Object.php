@@ -31,11 +31,18 @@
             $blog->setComment($register["Comment"]);
             $blog->setImage($register["Image"]);
 
+            $matriz[$counter]=$blog;
 
+            $counter++;
         }
-
-    }
-
+        return $matriz;
+    } 
+    
+    public function insertContent(Object_Blog $blog) {
+    $sql = "INSERT INTO CONTENT (Title, Date, Comment, Image) VALUES ('" . $blog->getTitle() . "' , '" . $blog->getDate() . "' , '" . $blog->getComment() . "','" . $blog->getImage() . "')";
+    
+        $this->conection->exec($sql);
+  }
 
     }
 
