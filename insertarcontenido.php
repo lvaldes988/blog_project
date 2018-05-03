@@ -19,8 +19,8 @@
 
       exit();
     }
-    if($__FILES ('image')('error')) {
-        switch ($__FILES('image')('error')) {
+    if($__FILES['image']['name']) {
+        switch ($__FILES['image']['name']) {
             case 1: //error eccess size fot php.ini
             echo "the image size is too big";
             break;
@@ -38,22 +38,38 @@
             break;
 
         }
+
      }else {
         echo "file uploaded susscefully<br/>";
 
-        if((isset($__FILES('image')('name')) && ($__FILES('image')('error')==UPLOAD_ERR_OK))) {
+        if((isset($__FILES['image']['name']) && ($__FILES['image']['error']==UPLOAD_ERR_OK))) {
             $destity_of_route = "images/";
 
-            move_uploaded_file($__FILES('image')('tmp_name'), $destity_of_route . $__FILES('image')('name'));
+            move_uploaded_file($__FILES['image']['tmp_name'], $destity_of_route . $__FILES['image']['name']);
 
-            echo "the file" . $__FILES('image')('name') . "has been copied sussccefully";
-        }else {
+            echo "The file" . $__FILES['image']['name'] . "has been copied sussccefully";
+
+        }else{
             "the file coundnt be uploaded";
 
         }
     }
 
-    $myquery = " INSERT INTO CONTENT (Title, Date, Comment, Image) VALUES ('Title', 'Date', 'Comment', 'Image')";
+    $thetitle=$__POST['campo_titulo'];
+    $thedate=date("Y-m-d H:i:s");
+    $thecomment=$__POST['area_comentario'];
+    $theimage=($__FILES['image']['name']);
+
+
+    $myquery = " INSERT INTO CONTENT (Title, Date, Comment, Image) VALUES ('" . $thetitle."', '" . $thedate . "', '" . $thecomment . "', '" . $theimage . "')";
+
+    $result=mysqli_query($$myconection, $myquery);
+
+    /*we close conection*/
+
+    mysqli_close($myconection);
+
+    echo "<br/> you have added the comment sussessfully<br\><br\>"
 
  ?>
 
