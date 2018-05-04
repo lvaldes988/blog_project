@@ -9,8 +9,8 @@
 <body>
 <?php
 
-include ("../models/Object_Blog.php");
-include ("../models/Handle_Object.php");
+include_once ("../models/Object_Blog.php");
+include_once ("../models/Handle_Object.php");
 
 try{
 
@@ -24,7 +24,7 @@ try{
 /*test connection*/
 
     if (!$myconection) {
-        echo "concextionfailed" . mysqli_error();
+        echo "concextionfailed" . mysql_error();
 
         exit();
     }
@@ -52,7 +52,7 @@ try{
         echo "file uploaded susscefully<br/>";
 
         if((isset($__FILES['image']['name']) && ($__FILES['image']['error']==UPLOAD_ERR_OK))) {
-            $destity_of_route = "images/";
+            $destity_of_route = "../images/";
 
             move_uploaded_file($__FILES['image']['tmp_name'], $destity_of_route . $__FILES['image']['name']);
 

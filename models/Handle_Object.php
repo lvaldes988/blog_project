@@ -1,6 +1,6 @@
 <?php  
 
-    include("Object_Blog");
+    include_once ("Object_Blog.php");
     class Handle_Object {
 
     private $conection;
