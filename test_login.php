@@ -25,8 +25,11 @@
         $register_number=$result->rowCount();
 
         if($register_number!=0) {
-            
-            echo "adelante";
+            session_start();
+
+            $_SESSION["users"]=$_POST["login"];
+            //echo "<h2>adelante";
+            header("Location:registered_users.php");
         }else{
             header("location:login.php");//this will maintain the user in the login page
         }
